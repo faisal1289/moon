@@ -1,6 +1,6 @@
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},  // Naya plugin
+    tailwindcss: {},
     autoprefixer: {},
   },
 };
