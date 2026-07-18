@@ -102,6 +102,22 @@ module.exports = {
           "0%, 100%": { opacity: 1 },
           "50%": { opacity: 0.8 },
         },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "border-rotate": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0.7 },
+        },
+        "glow-border": {
+          "0%, 100%": { borderColor: "rgba(37, 99, 235, 0.3)" },
+          "50%": { borderColor: "rgba(124, 58, 237, 0.6)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -109,6 +125,11 @@ module.exports = {
         "fade-in": "fade-in 0.6s ease-out",
         "glow": "glow 2s ease-in-out infinite",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+        "gradient-shift": "gradient-shift 4s ease-in-out infinite",
+        "border-rotate": "border-rotate 4s linear infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "glow-border": "glow-border 3s ease-in-out infinite",
+        "blob": "blob 7s infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
