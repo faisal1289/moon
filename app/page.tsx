@@ -127,7 +127,7 @@ export default function Home() {
         {/* 🎬 FULL SCREEN VIDEO BACKGROUND */}
         <div className="absolute inset-0">
           <video
-            src="/videos/Hero.mp4"
+            src="/Videos/Hero.mp4"
             autoPlay
             loop
             muted
