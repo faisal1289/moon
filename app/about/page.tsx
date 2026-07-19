@@ -14,7 +14,10 @@ import {
   Star,
   CheckCircle,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  ShoppingBag,
+  Building2,
+  Crown
 } from 'lucide-react';
 
 export default function AboutPage() {
@@ -93,13 +96,13 @@ export default function AboutPage() {
             About Us
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Making Premium Apps
+            Premium Apps
             <br />
-            <span className="gradient-text">Accessible to Everyone</span>
+            <span className="gradient-text">At Pocket-Friendly Prices</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            We believe that high-quality apps should be affordable. We help businesses, 
-            creators, and individuals launch their dream apps without the heavy price tag.
+            We make premium apps accessible to everyone — whether you want to use a ready app 
+            or build your own custom app business.
           </p>
         </motion.div>
 
@@ -114,24 +117,24 @@ export default function AboutPage() {
             <Rocket className="h-12 w-12 text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-white mb-2">Our Mission</h3>
             <p className="text-gray-400 text-sm">
-              To democratize app development — making premium apps accessible to 
-              businesses, creators, and individuals at prices that make sense.
+              To make premium apps affordable for everyone — no middlemen, 
+              no markup, just quality at fair prices.
             </p>
           </div>
           <div className="glass-card rounded-2xl p-6 border border-[#1A1A1A] text-center card-hover">
             <Shield className="h-12 w-12 text-purple-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-white mb-2">Our Promise</h3>
             <p className="text-gray-400 text-sm">
-              Transparent pricing, no hidden fees, bank-level security, and 
-              continuous improvement based on user feedback.
+              Transparent pricing, no hidden fees, high-level security, and 
+              apps that actually work — built for you.
             </p>
           </div>
           <div className="glass-card rounded-2xl p-6 border border-[#1A1A1A] text-center card-hover">
             <Users className="h-12 w-12 text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-white mb-2">Our Community</h3>
             <p className="text-gray-400 text-sm">
-              Over 500+ businesses trust us. We actively listen to our community 
-              and build features they actually need.
+              Over 500+ users trust us. We listen to feedback and build 
+              what the community actually needs.
             </p>
           </div>
         </motion.div>
@@ -147,46 +150,65 @@ export default function AboutPage() {
             What <span className="gradient-text">We Offer</span>
           </h2>
           <p className="text-gray-400 text-center max-w-2xl mx-auto mb-10">
-            Everything you need to launch your app without the million-dollar budget.
+            Two ways to get your dream app — ready-to-use or custom-built.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: <Code className="h-6 w-6 text-blue-400" />,
-                title: 'Ready-to-Deploy Apps',
-                desc: 'Choose from 50+ premium app clones — Uber, Zomato, Netflix, and more. All feature-rich, secure, and ready to launch.'
-              },
-              {
-                icon: <Sparkles className="h-6 w-6 text-purple-400" />,
-                title: 'Custom App Development',
-                desc: 'Have a unique idea? We build custom apps from scratch. No matter the complexity, we bring your vision to life.'
-              },
-              {
-                icon: <TrendingUp className="h-6 w-6 text-green-400" />,
-                title: 'Build Your Own App Business',
-                desc: 'Launch your own app platform and earn passive income. We help you create apps that generate revenue for you.'
-              },
-              {
-                icon: <Award className="h-6 w-6 text-yellow-400" />,
-                title: 'Enterprise-Grade Security',
-                desc: 'Your data and users\' data stay protected with bank-level security. We follow the best practices in the industry.'
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
-                className="glass-card rounded-xl p-6 border border-[#1A1A1A] card-hover flex gap-4"
-              >
-                <div className="flex-shrink-0 mt-1">{item.icon}</div>
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-1">{item.title}</h4>
-                  <p className="text-sm text-gray-400">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+            {/* Card 1: Ready Apps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              className="glass-card rounded-xl p-6 border border-[#1A1A1A] card-hover flex gap-4"
+            >
+              <div className="flex-shrink-0 mt-1">
+                <ShoppingBag className="h-6 w-6 text-blue-400" />
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-1">Ready-to-Use Apps</h4>
+                <p className="text-sm text-gray-400">
+                  Choose from 50+ premium apps — Uber, Zomato, Netflix, WhatsApp, and more. 
+                  You get full access to use these apps at a fraction of the original cost. 
+                  No developers, no hassle. Just subscribe and start using.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 2: Custom Apps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              className="glass-card rounded-xl p-6 border border-[#1A1A1A] card-hover flex gap-4"
+            >
+              <div className="flex-shrink-0 mt-1">
+                <Building2 className="h-6 w-6 text-purple-400" />
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-1">Build Your Own App</h4>
+                <p className="text-sm text-gray-400">
+                  Have a unique idea? Contact us and we'll build your custom app from scratch. 
+                  Launch your own app business and earn revenue. We build apps at prices 
+                  that traditional developers charge 10x more for.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Extra Description */}
+          <div className="mt-6 glass-card rounded-xl p-6 border border-[#1A1A1A]">
+            <div className="flex items-start gap-4">
+              <Crown className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-1" />
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-1">Why Choose Us?</h4>
+                <p className="text-sm text-gray-400">
+                  Whether you want to use a ready app or build your own, we make it affordable. 
+                  Our subscription model is designed to be pocket-friendly, and our custom 
+                  development costs a fraction of what agencies charge. You get the same 
+                  premium quality — without the premium price tag.
+                </p>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -201,46 +223,45 @@ export default function AboutPage() {
             How <span className="gradient-text">It Works</span>
           </h2>
           <p className="text-gray-400 text-center max-w-2xl mx-auto mb-10">
-            From idea to launch — we make app development simple and affordable.
+            Two simple paths to get your app — use or build.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[
-              {
-                step: '01',
-                title: 'Choose or Request',
-                desc: 'Browse our 50+ ready apps or submit a custom request for a new app.'
-              },
-              {
-                step: '02',
-                title: 'We Build It',
-                desc: 'Our team builds your app with premium features, modern design, and top-notch security.'
-              },
-              {
-                step: '03',
-                title: 'Launch & Earn',
-                desc: 'Take your app live, start earning revenue. We provide full support.'
-              },
-              {
-                step: '04',
-                title: 'Grow & Scale',
-                desc: 'Update, scale, and improve your app based on user feedback and needs.'
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                className="glass-card rounded-xl p-6 border border-[#1A1A1A] text-center card-hover"
-              >
-                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-3">
-                  {item.step}
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-2">{item.title}</h4>
-                <p className="text-sm text-gray-400">{item.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Path 1: Use Ready Apps */}
+            <div className="glass-card rounded-2xl p-6 border border-[#1A1A1A]">
+              <h4 className="text-xl font-bold text-blue-400 mb-4 text-center">Use Ready Apps</h4>
+              <div className="space-y-4">
+                {[
+                  'Browse our collection of 50+ premium apps',
+                  'Choose the app you want to use',
+                  'Subscribe at a pocket-friendly price',
+                  'Start using the app immediately'
+                ].map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="text-blue-400 font-bold text-sm min-w-[24px]">{i + 1}</span>
+                    <span className="text-gray-300 text-sm">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Path 2: Build Custom App */}
+            <div className="glass-card rounded-2xl p-6 border border-[#1A1A1A]">
+              <h4 className="text-xl font-bold text-purple-400 mb-4 text-center">Build Your Own App</h4>
+              <div className="space-y-4">
+                {[
+                  'Contact us with your app idea',
+                  'We discuss features and pricing',
+                  'Our team builds your custom app',
+                  'Launch your own app business'
+                ].map((step, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="text-purple-400 font-bold text-sm min-w-[24px]">{i + 1}</span>
+                    <span className="text-gray-300 text-sm">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -258,35 +279,19 @@ export default function AboutPage() {
               Why <span className="gradient-text">Choose Us</span>
             </h2>
             <p className="text-gray-400 text-center max-w-2xl mx-auto mb-8 relative z-10">
-              Because we believe everyone deserves a premium app without breaking the bank.
+              Because everyone deserves a premium app without breaking the bank.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
               {[
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: '50+ premium apps ready to deploy'
-                },
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: 'Custom development at 90% less cost than traditional agencies'
-                },
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: 'No hidden fees — what you see is what you pay'
-                },
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: 'Bank-level security for your data and users'
-                },
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: 'Community-driven — we build what you want'
-                },
-                {
-                  icon: <CheckCircle className="h-5 w-5 text-green-400" />,
-                  text: 'Launch your own app business and earn passive income'
-                }
+                '50+ premium apps ready to use at low subscription prices',
+                'Custom app development at 90% less than agencies',
+                'No hidden fees — transparent pricing always',
+                'High-level security for your data and users',
+                'Build your own app and earn passive income',
+                'Community-driven — we build what you want',
+                'No developers needed — we handle everything',
+                '24/7 support for all your app needs'
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -295,8 +300,8 @@ export default function AboutPage() {
                   transition={{ duration: 0.3, delay: 0.6 + i * 0.1 }}
                   className="flex items-center gap-3 glass-card rounded-xl p-4 border border-[#1A1A1A]"
                 >
-                  {item.icon}
-                  <span className="text-gray-300 text-sm">{item.text}</span>
+                  <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300 text-sm">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -311,8 +316,8 @@ export default function AboutPage() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
           {[
-            { number: '50+', label: 'Apps Ready' },
-            { number: '500+', label: 'Businesses Trust Us' },
+            { number: '50+', label: 'Premium Apps' },
+            { number: '500+', label: 'Happy Users' },
             { number: '4.8★', label: 'Average Rating' },
             { number: '100%', label: 'Ad-Free' }
           ].map((stat, i) => (
@@ -341,17 +346,24 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent"></div>
           <Sparkles className="h-12 w-12 text-blue-400 mx-auto mb-4 relative z-10" />
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">
-            Ready to Launch Your App?
+            Ready to Get Your App?
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8 relative z-10">
-            Join 500+ businesses already using our platform. Get started today and 
-            build your dream app at an affordable price.
+            Whether you want to use a ready app or build your own — we're here to help. 
+            Start today with our pocket-friendly plans.
           </p>
-          <Link href="/apps" className="relative z-10">
-            <Button className="btn-primary px-8 py-6 text-lg rounded-full shadow-lg shadow-blue-500/30 hover:shadow-purple-500/50 transition-all duration-300">
-              Explore Our Apps
-            </Button>
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4 relative z-10">
+            <Link href="/apps">
+              <Button className="btn-primary px-8 py-6 text-lg rounded-full shadow-lg shadow-blue-500/30 hover:shadow-purple-500/50 transition-all duration-300">
+                Explore Apps
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="outline" className="border-gray-600 text-white hover:bg-white/10 px-8 py-6 text-lg rounded-full hover:border-purple-500/30 transition-all duration-300">
+                Build Your Own App
+              </Button>
+            </Link>
+          </div>
         </motion.div>
 
       </div>
