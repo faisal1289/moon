@@ -299,105 +299,110 @@ export default function AppsPage() {
           </motion.div>
         )}
 
-        {/* ===== Apps Grid/List ===== */}
-        {filteredApps.length === 0 ? (
-          <div className="text-center py-20">
-            <Search className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white">No apps found</h3>
-            <p className="text-gray-400">Try adjusting your search or filters</p>
-          </div>
-        ) : (
-          <div className={`
-            grid gap-6
-            ${viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-              : 'grid-cols-1'
-            }
+      {/* ===== Apps Grid/List ===== */}
+{filteredApps.length === 0 ? (
+  <div className="text-center py-20">
+    <Search className="h-16 w-16 text-gray-600 mx-auto mb-4" />
+    <h3 className="text-xl font-semibold text-white">No apps found</h3>
+    <p className="text-gray-400">Try adjusting your search or filters</p>
+  </div>
+) : (
+  <div className={`
+    grid gap-6
+    ${viewMode === 'grid' 
+      ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+      : 'grid-cols-1'
+    }
+  `}>
+    {filteredApps.map((app, i) => (
+      <motion.div
+        key={app.id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: i * 0.05 }}
+      >
+        <Link href={`/apps/${app.id}`}>
+          <Card className={`
+            glass-card card-hover border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-300 cursor-pointer
+            ${viewMode === 'list' ? 'flex flex-col md:flex-row md:items-center gap-4' : ''}
           `}>
-            {filteredApps.map((app, i) => (
-              <motion.div
-                key={app.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-              >
-                <Card className={`
-                  glass-card card-hover border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-300
-                  ${viewMode === 'list' ? 'flex flex-col md:flex-row md:items-center gap-4' : ''}
-                `}>
-                  <CardContent className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center border border-blue-500/20 flex-shrink-0">
-                          <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{app.name[0]}</span>
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-white">{app.name}</h3>
-                          <Badge className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-300 border-0 text-xs">
-                            {app.category}
-                          </Badge>
-                          {app.status && (
-                            <Badge className={`
-                              ml-2 border-0 text-xs
-                              ${app.status === 'Best Seller' ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400' : ''}
-                              ${app.status === 'Trending' ? 'bg-gradient-to-r from-pink-500/20 to-rose-500/20 text-pink-400' : ''}
-                              ${app.status === 'Popular' ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400' : ''}
-                            `}>
-                              {app.status === 'Best Seller' && '⭐ '}
-                              {app.status === 'Trending' && '🔥 '}
-                              {app.status === 'Popular' && '📈 '}
-                              {app.status}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-2 py-1 rounded">
-                        <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" />
-                        <span className="text-sm text-white">{app.rating}</span>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">{app.desc}</p>
-                    
-                    {/* Features Tags */}
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {app.features.slice(0, 3).map((feature, idx) => (
-                        <Badge key={idx} className="bg-[#1A1A1A] text-gray-400 border-0 text-xs">
-                          {feature}
-                        </Badge>
-                      ))}
-                      {app.features.length > 3 && (
-                        <Badge className="bg-[#1A1A1A] text-gray-400 border-0 text-xs">
-                          +{app.features.length - 3} more
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-center justify-between pt-4 border-t border-[#1A1A1A]">
-                      <div className="flex items-center gap-4 text-xs text-gray-500">
-                        <span className="flex items-center gap-1">
-                          <Download className="h-3 w-3" />
-                          {app.downloads}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Users className="h-3 w-3" />
-                          {app.downloads}
-                        </span>
-                      </div>
-                      <Button 
-                        onClick={() => handleDownload(app.name)}
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white h-9 px-4 rounded-full text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300"
-                      >
-                        <Download className="h-4 w-4 mr-2" />
-                        Download Now
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        )}
+            <CardContent className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center border border-blue-500/20 flex-shrink-0">
+                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{app.name[0]}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white">{app.name}</h3>
+                    <Badge className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-300 border-0 text-xs">
+                      {app.category}
+                    </Badge>
+                    {app.status && (
+                      <Badge className={`
+                        ml-2 border-0 text-xs
+                        ${app.status === 'Best Seller' ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400' : ''}
+                        ${app.status === 'Trending' ? 'bg-gradient-to-r from-pink-500/20 to-rose-500/20 text-pink-400' : ''}
+                        ${app.status === 'Popular' ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400' : ''}
+                      `}>
+                        {app.status === 'Best Seller' && '⭐ '}
+                        {app.status === 'Trending' && '🔥 '}
+                        {app.status === 'Popular' && '📈 '}
+                        {app.status}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-2 py-1 rounded">
+                  <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm text-white">{app.rating}</span>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 text-sm mb-3 line-clamp-2">{app.desc}</p>
+              
+              {/* Features Tags */}
+              <div className="flex flex-wrap gap-2 mb-3">
+                {app.features.slice(0, 3).map((feature, idx) => (
+                  <Badge key={idx} className="bg-[#1A1A1A] text-gray-400 border-0 text-xs">
+                    {feature}
+                  </Badge>
+                ))}
+                {app.features.length > 3 && (
+                  <Badge className="bg-[#1A1A1A] text-gray-400 border-0 text-xs">
+                    +{app.features.length - 3} more
+                  </Badge>
+                )}
+              </div>
+              
+              <div className="flex items-center justify-between pt-4 border-t border-[#1A1A1A]">
+                <div className="flex items-center gap-4 text-xs text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <Download className="h-3 w-3" />
+                    {app.downloads}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Users className="h-3 w-3" />
+                    {app.downloads}
+                  </span>
+                </div>
+                <Button 
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent card click when clicking button
+                    handleDownload(app.name);
+                  }}
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white h-9 px-4 rounded-full text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300"
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Now
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      </motion.div>
+    ))}
+  </div>
+)}
 
         {/* ===== Stats Bar ===== */}
         <div className="mt-12 p-6 rounded-xl bg-[#1A1A1A] border border-[#2D2D2D]">
