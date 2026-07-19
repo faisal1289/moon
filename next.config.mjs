@@ -3,9 +3,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Disable Turbopack for Vercel
-  turbopack: {},
-  // Ensure proper output
+  // Ensure proper output for Vercel
   output: 'standalone',
 };
 
