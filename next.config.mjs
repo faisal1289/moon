@@ -2,15 +2,11 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
   },
-  // Turbopack config - Next.js 16+
+  // Disable Turbopack for Vercel
   turbopack: {},
+  // Ensure proper output
+  output: 'standalone',
 };
 
 export default nextConfig;
