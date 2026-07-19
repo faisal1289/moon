@@ -20,7 +20,9 @@ import {
   ArrowLeft,
   TrendingUp,
   Clock,
-  Sparkles
+  Sparkles,
+  Menu,
+  X
 } from 'lucide-react';
 
 // All Apps Data
@@ -122,6 +124,7 @@ const sortOptions = ['Popular', 'Rating', 'Downloads', 'Newest'];
 
 export default function AppsPage() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -161,7 +164,7 @@ export default function AppsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20 pb-12 relative">
+    <div className="min-h-screen bg-black text-white pt-20 pb-12 relative overflow-x-hidden">
       
       {/* Background Fade Effect */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
@@ -169,7 +172,7 @@ export default function AppsPage() {
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* ===== NAVBAR WITH ACTIVE LINK ===== */}
+      {/* ===== NAVBAR WITH MOBILE SUPPORT ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 border-b border-[#1A1A1A] backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -178,14 +181,16 @@ export default function AppsPage() {
             </div>
             <span className="font-bold text-xl">App<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Clone</span></span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`transition-all duration-300 font-medium ${
+                  className={`transition-all duration-300 font-medium text-sm lg:text-base ${
                     isActive
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
                       : 'text-gray-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400'
@@ -195,11 +200,56 @@ export default function AppsPage() {
                 </Link>
               );
             })}
-            <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
+            <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-4 lg:px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
               Sign In
             </Button>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-gray-400 hover:text-white focus:outline-none"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
+        
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black/95 border-b border-[#1A1A1A] px-4 py-4"
+          >
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`transition-all duration-300 font-medium text-sm ${
+                      isActive
+                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
+                        : 'text-gray-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full">
+                Sign In
+              </Button>
+            </div>
+          </motion.div>
+        )}
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

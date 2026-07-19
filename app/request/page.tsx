@@ -21,7 +21,8 @@ import {
   X,
   Sparkles,
   Clock,
-  TrendingUp
+  TrendingUp,
+  Menu
 } from 'lucide-react';
 
 // Sample Requests Data
@@ -82,6 +83,7 @@ const statusColors = {
 
 export default function RequestsPage() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [requests, setRequests] = useState(initialRequests);
   const [searchQuery, setSearchQuery] = useState('');
   const [showForm, setShowForm] = useState(false);
@@ -164,7 +166,7 @@ export default function RequestsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20 pb-12 relative">
+    <div className="min-h-screen bg-black text-white pt-20 pb-12 relative overflow-x-hidden">
       
       {/* Background Fade Effect */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
@@ -172,7 +174,7 @@ export default function RequestsPage() {
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* ===== NAVBAR WITH ACTIVE LINK ===== */}
+      {/* ===== NAVBAR WITH MOBILE SUPPORT ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 border-b border-[#1A1A1A] backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -181,14 +183,16 @@ export default function RequestsPage() {
             </div>
             <span className="font-bold text-xl">App<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Clone</span></span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`transition-all duration-300 font-medium ${
+                  className={`transition-all duration-300 font-medium text-sm lg:text-base ${
                     isActive
                       ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
                       : 'text-gray-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400'
@@ -198,11 +202,56 @@ export default function RequestsPage() {
                 </Link>
               );
             })}
-            <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
+            <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-4 lg:px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
               Sign In
             </Button>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-gray-400 hover:text-white focus:outline-none"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
+        
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black/95 border-b border-[#1A1A1A] px-4 py-4"
+          >
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`transition-all duration-300 font-medium text-sm ${
+                      isActive
+                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400'
+                        : 'text-gray-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full">
+                Sign In
+              </Button>
+            </div>
+          </motion.div>
+        )}
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,7 +275,7 @@ export default function RequestsPage() {
           </div>
           <Button 
             onClick={() => setShowForm(!showForm)}
-            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300"
+            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full sm:w-auto"
           >
             {showForm ? (
               <>
@@ -250,7 +299,7 @@ export default function RequestsPage() {
             exit={{ opacity: 0, height: 0 }}
             className="mb-8 overflow-hidden"
           >
-            <div className="glass-card rounded-xl p-6 border border-[#1A1A1A]">
+            <div className="glass-card rounded-xl p-4 sm:p-6 border border-[#1A1A1A]">
               <h3 className="text-xl font-semibold text-white mb-4">Submit a Request</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -332,15 +381,15 @@ export default function RequestsPage() {
                 transition={{ duration: 0.3, delay: i * 0.05 }}
               >
                 <Card className="glass-card card-hover border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-300">
-                  <CardContent className="p-6">
+                  <CardContent className="p-4 sm:p-6">
                     {/* User Info */}
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-blue-500/20">
-                          <User className="h-5 w-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-blue-500/20">
+                          <User className="h-4 w-4 sm:h-5 sm:w-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white">{req.userName}</h3>
+                          <h3 className="font-semibold text-white text-sm sm:text-base">{req.userName}</h3>
                           <div className="flex items-center gap-2">
                             {getStatusBadge(req.status)}
                           </div>
@@ -353,7 +402,7 @@ export default function RequestsPage() {
                     </div>
 
                     {/* App Name */}
-                    <h4 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-2">
+                    <h4 className="text-base sm:text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-2">
                       {req.appName}
                     </h4>
 
@@ -386,26 +435,26 @@ export default function RequestsPage() {
         )}
 
         {/* ===== Stats Bar ===== */}
-        <div className="mt-12 p-6 rounded-xl bg-[#1A1A1A] border border-[#2D2D2D]">
+        <div className="mt-12 p-4 sm:p-6 rounded-xl bg-[#1A1A1A] border border-[#2D2D2D]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
-              <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{requests.length}</p>
+              <p className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{requests.length}</p>
               <p className="text-sm text-gray-400">Total Requests</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              <p className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 {requests.reduce((acc, req) => acc + req.votes, 0)}
               </p>
               <p className="text-sm text-gray-400">Total Votes</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              <p className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 {requests.filter(r => r.status === 'Trending' || r.status === 'In Progress').length}
               </p>
               <p className="text-sm text-gray-400">Active Requests</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              <p className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 {requests.filter(r => r.status === 'Pending').length}
               </p>
               <p className="text-sm text-gray-400">Pending</p>

@@ -273,7 +273,7 @@ export default function AppDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-8 pb-12 relative">
+    <div className="min-h-screen bg-black text-white pt-8 pb-12 relative overflow-x-hidden">
       
       {/* Background Fade */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
@@ -281,7 +281,7 @@ export default function AppDetailPage() {
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ===== BACK BUTTON ONLY ===== */}
         <div className="mb-6">
@@ -300,15 +300,15 @@ export default function AppDetailPage() {
           transition={{ duration: 0.6 }}
         >
           <Card className="glass-card card-hover border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-300">
-            <CardContent className="p-6 md:p-8">
+            <CardContent className="p-4 sm:p-6 md:p-8">
               {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-start gap-6 mb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-blue-500/20 flex-shrink-0">
-                  <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{app.name[0]}</span>
+              <div className="flex flex-col md:flex-row md:items-start gap-4 sm:gap-6 mb-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-blue-500/20 flex-shrink-0 mx-auto md:mx-0">
+                  <span className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{app.name[0]}</span>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center flex-wrap gap-3 mb-2">
-                    <h1 className="text-3xl md:text-4xl font-bold text-white">{app.name}</h1>
+                <div className="flex-1 text-center md:text-left">
+                  <div className="flex items-center flex-wrap gap-2 mb-2 justify-center md:justify-start">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{app.name}</h1>
                     <Badge className={`${
                       app.status === 'Best Seller' ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400' :
                       app.status === 'Trending' ? 'bg-gradient-to-r from-pink-500/20 to-rose-500/20 text-pink-400' :
@@ -321,7 +321,7 @@ export default function AppDetailPage() {
                     </Badge>
                   </div>
                   <p className="text-gray-400 text-sm mb-2">{app.category}</p>
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex flex-wrap items-center gap-4 text-sm justify-center md:justify-start">
                     <div className="flex items-center gap-1">
                       {renderStars(app.rating)}
                       <span className="text-white font-semibold ml-1">{app.rating}</span>
@@ -331,16 +331,16 @@ export default function AppDetailPage() {
                       <Download className="h-4 w-4" />
                       {app.downloads} downloads
                     </span>
-                    <span className="text-gray-500">|</span>
+                    <span className="text-gray-500 hidden sm:inline">|</span>
                     <span className="text-gray-400 flex items-center gap-1">
                       <Users className="h-4 w-4" />
                       {app.reviews.length} reviews
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
                   <span className="text-2xl font-bold text-blue-400">{app.price}</span>
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white h-10 px-6 rounded-full text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white h-10 px-6 rounded-full text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full sm:w-auto">
                     <Download className="h-4 w-4 mr-2" />
                     Download Now
                   </Button>
@@ -381,11 +381,11 @@ export default function AppDetailPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8"
+          className="mt-8 text-center sm:text-left"
         >
           <Button
             onClick={() => setShowReviewForm(!showReviewForm)}
-            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-6 text-lg rounded-full shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300"
+            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full sm:w-auto"
           >
             <Star className="h-5 w-5 mr-2" />
             {showReviewForm ? 'Close Review Form' : 'Submit Review'}
@@ -400,7 +400,7 @@ export default function AppDetailPage() {
             exit={{ opacity: 0, height: 0 }}
             className="mt-6 overflow-hidden"
           >
-            <div className="glass-card rounded-xl p-6 border border-[#1A1A1A] max-w-2xl mx-auto">
+            <div className="glass-card rounded-xl p-4 sm:p-6 border border-[#1A1A1A] max-w-2xl mx-auto">
               <h3 className="text-xl font-semibold text-white mb-4">Write a Review</h3>
               <form onSubmit={handleSubmitReview} className="space-y-4">
                 {/* Rating */}
@@ -417,7 +417,7 @@ export default function AppDetailPage() {
                         className="focus:outline-none transition-transform hover:scale-110"
                       >
                         <Star 
-                          className={`h-8 w-8 ${
+                          className={`h-6 w-6 sm:h-8 sm:w-8 ${
                             star <= (hoverRating || rating) 
                               ? 'text-yellow-400 fill-yellow-400' 
                               : 'text-gray-600'
@@ -445,7 +445,7 @@ export default function AppDetailPage() {
                 </div>
 
                 {/* Submit / Cancel */}
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button 
                     type="submit"
                     className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-5 text-base rounded-full shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 flex-1"
@@ -485,14 +485,14 @@ export default function AppDetailPage() {
           <div className="space-y-4">
             {reviews.map((review) => (
               <Card key={review.id} className="glass-card border-[#1A1A1A] hover:border-purple-500/20 transition-all duration-300">
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-blue-500/20">
-                        <User className="h-5 w-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-blue-500/20 flex-shrink-0">
+                        <User className="h-4 w-4 sm:h-5 sm:w-5 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white">{review.user}</h4>
+                        <h4 className="font-semibold text-white text-sm sm:text-base">{review.user}</h4>
                         <div className="flex items-center gap-2">
                           <div className="flex gap-0.5">
                             {renderStars(review.rating)}
