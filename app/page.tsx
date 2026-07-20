@@ -23,6 +23,9 @@ import {
   X
 } from 'lucide-react';
 
+// ✅ YEH IMPORT ADD KARO
+import { MoonIDAuth } from '@/components/MoonIDAuth';
+
 const apps = [
   { id: 1, name: 'Uber Clone', category: 'Transport', price: '₹299', rating: 4.8, desc: 'Complete ride-hailing platform with real-time tracking' },
   { id: 2, name: 'Zomato Clone', category: 'Food', price: '₹349', rating: 4.7, desc: 'Food delivery app with restaurant discovery' },
@@ -118,9 +121,10 @@ export default function Home() {
                 </Link>
               );
             })}
-            <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-4 lg:px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300">
-              Sign In
-            </Button>
+            
+            {/* ✅ YAHAN CHANGE - Sign In ki jagah MoonIDAuth */}
+            <MoonIDAuth />
+            
           </div>
           
           {/* Mobile Menu Button */}
@@ -162,9 +166,10 @@ export default function Home() {
                   </Link>
                 );
               })}
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-6 text-sm shadow-lg shadow-blue-500/20 hover:shadow-purple-500/40 transition-all duration-300 w-full">
-                Sign In
-              </Button>
+              
+              {/* ✅ YAHAN BHI CHANGE - Mobile menu mein bhi MoonIDAuth */}
+              <MoonIDAuth />
+              
             </div>
           </motion.div>
         )}
